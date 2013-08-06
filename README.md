@@ -1,0 +1,1 @@
+A set of classes to translate a text from a HTML to BBcode and from BBCode to Markdown.
