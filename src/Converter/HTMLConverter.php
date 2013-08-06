@@ -191,6 +191,8 @@ class HTMLConverter extends Converter {
     $this->replaceOtherTags();
     $this->text = strip_tags($this->text);
     $this->restoreSnippets();
+
+    return $this->text;
   }
 
 } 

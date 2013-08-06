@@ -168,6 +168,8 @@ class BBCodeConverter extends Converter {
     $this->replaceUrls();
     $this->replaceImages();
     $this->replaceSnippets();
+
+    return $this->text;
   }
 
 } 
