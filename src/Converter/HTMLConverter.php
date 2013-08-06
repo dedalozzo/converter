@@ -36,12 +36,12 @@ class HTMLConverter extends Converter {
 
     for ($i = 0; $i < $snippetsCount; $i++) {
       // We try to determine which tags the code is inside: <pre></pre>, <code></code>, [code][/code]
-      if (!empty($snippets['openpre'][$i]))
-        $snippet = "[code]".PHP_EOL.trim($snippets['contentpre'][$i]).PHP_EOL."[/code]";
-      elseif (!empty($snippets['opencode'][$i]))
-        $snippet = "[code]".PHP_EOL.trim($snippets['contentcode'][$i]).PHP_EOL."[/code]";
+      if (!empty($this->snippets['openpre'][$i]))
+        $snippet = "[code]".PHP_EOL.trim($this->snippets['contentpre'][$i]).PHP_EOL."[/code]";
+      elseif (!empty($this->snippets['opencode'][$i]))
+        $snippet = "[code]".PHP_EOL.trim($this->snippets['contentcode'][$i]).PHP_EOL."[/code]";
       else
-        $snippet = $snippets['openbbcode'][$i].PHP_EOL.trim($this->snippets['contentbbcode'][$i]).PHP_EOL.$this->snippets['closebbcode'][$i];
+        $snippet = $this->snippets['openbbcode'][$i].PHP_EOL.trim($this->snippets['contentbbcode'][$i]).PHP_EOL.$this->snippets['closebbcode'][$i];
 
       $this->text = preg_replace('/___SNIPPET___/', PHP_EOL.trim($snippet).PHP_EOL, $this->text, 1);
     }
