@@ -161,6 +161,7 @@ class BBCodeConverter extends Converter {
 
   //! @brief Converts the provided BBCode text to an equivalent Markdown text.
   public function toMarkdown() {
+    $this->replaceBold();
     $this->replaceItalic();
     $this->replaceUnderline();
     $this->replaceStrikethrough();
