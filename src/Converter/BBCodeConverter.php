@@ -148,7 +148,7 @@ class BBCodeConverter extends Converter {
 
       function ($matches) {
         if (isset($matches['snippet']))
-          return "```".$matches['language'].PHP_EOL.$matches['snippet']."```".PHP_EOL;
+          return "```".strtolower($matches['language']).PHP_EOL.$matches['snippet']."```".PHP_EOL;
         else
           throw new \RuntimeException(sprintf("Text identified by '%d' has malformed BBCode snippet", $this->id));
       },
