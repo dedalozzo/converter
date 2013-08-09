@@ -147,8 +147,18 @@ class BBCodeConverter extends Converter {
     $this->text = preg_replace_callback('%\[code\s*=?(?P<language>\w*)\](?P<snippet>[\W\D\w\s]*?)\[/code\]%i',
 
       function ($matches) {
-        if (isset($matches['snippet']))
-          return "```".strtolower($matches['language']).PHP_EOL.$matches['snippet']."```".PHP_EOL;
+        if (isset($matches['snippet'])) {
+          $language = strtolower($matches['language']);
+
+          if ($language == 'html4strict')
+            $language = 'html';
+          elseif ($language == 'shell' or $language == 'dos')
+            $language = 'sh';
+          elseif ($language == 'xul')
+            $language = 'xml';
+
+          return "```".$language.PHP_EOL.$matches['snippet']."```".PHP_EOL;
+        }
         else
           throw new \RuntimeException(sprintf("Text identified by '%d' has malformed BBCode snippet", $this->id));
       },
