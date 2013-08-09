@@ -108,7 +108,7 @@ class BBCodeConverter extends Converter {
   //! @brief Replaces BBCode urls.
   protected function replaceUrls() {
     
-    $this->text = preg_replace_callback('%\[url\s*=\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\s]+))\s*(?:[^]\s]*)\]([\W\D\w\s]*?)\[/url\]%i',
+    $this->text = preg_replace_callback('%\[url\s*=\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\]\s]+))\s*(?:[^]\s]*)\]([\W\D\w\s]*?)\[/url\]%i',
 
       function ($matches) {
         if (isset($matches[1]) && isset($matches[2]))
@@ -126,7 +126,7 @@ class BBCodeConverter extends Converter {
   //! @brief Replaces BBCode images.
   protected function replaceImages() {
 
-    $this->text = preg_replace_callback('%\[img\s*\]\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\s]+))\s*(?:[^]\s]*)\[/img\]%i',
+    $this->text = preg_replace_callback('%\[img\s*\]\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\]\s]+))\s*(?:[^]\s]*)\[/img\]%i',
 
       function ($matches) {
         if (isset($matches[1]))
