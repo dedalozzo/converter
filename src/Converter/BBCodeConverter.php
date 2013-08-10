@@ -150,12 +150,24 @@ class BBCodeConverter extends Converter {
         if (isset($matches['snippet'])) {
           $language = strtolower($matches['language']);
 
-          if ($language == 'html4strict')
+          if ($language == 'html4strict' or $language == 'div')
             $language = 'html';
           elseif ($language == 'shell' or $language == 'dos')
             $language = 'sh';
           elseif ($language == 'xul')
             $language = 'xml';
+          elseif ($language == 'asm')
+            $language = 'nasm';
+          elseif ($language == 'vb')
+            $language = 'vb.net';
+          elseif ($language == 'asp')
+            $language = 'aspx-vb';
+          elseif ($language == 'xaml')
+            $language = 'xml';
+          elseif ($language == 'cplusplus')
+            $language = 'cpp';
+          elseif ($language == 'txt' or $language == 'gettext')
+            $language = 'text';
 
           return "```".$language.PHP_EOL.$matches['snippet']."```".PHP_EOL;
         }
