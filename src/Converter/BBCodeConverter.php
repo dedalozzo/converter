@@ -152,13 +152,13 @@ class BBCodeConverter extends Converter {
 
           if ($language == 'html4strict' or $language == 'div')
             $language = 'html';
-          elseif ($language == 'shell' or $language == 'dos')
+          elseif ($language == 'shell' or $language == 'dos' or $language == 'batch')
             $language = 'sh';
-          elseif ($language == 'xul')
+          elseif ($language == 'xul' or $language == 'wpf')
             $language = 'xml';
           elseif ($language == 'asm')
             $language = 'nasm';
-          elseif ($language == 'vb')
+          elseif ($language == 'vb' or $language == 'visualbasic' or $language == 'vba')
             $language = 'vb.net';
           elseif ($language == 'asp')
             $language = 'aspx-vb';
@@ -168,6 +168,12 @@ class BBCodeConverter extends Converter {
             $language = 'cpp';
           elseif ($language == 'txt' or $language == 'gettext')
             $language = 'text';
+          elseif ($language == 'basic')
+            $language = 'cbmbas';
+          elseif ($language == 'lisp')
+            $language = 'clojure';
+          elseif ($language == 'aspnet')
+            $language = 'aspx-vb';
 
           return "```".$language.PHP_EOL.$matches['snippet']."```".PHP_EOL;
         }
