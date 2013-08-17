@@ -18,11 +18,11 @@ class HTMLConverter extends Converter {
   // Let's find all code snippets inside the body. The code can be inside <pre></pre>, <code></code>, or [code][/code]
   // if you are using BBCode markup language.
   protected function removeSnippets() {
-    $pattern = '%(?P<openpre><pre>)(?P<contentpre>[\W\D\w\s]*?)(?P<closepre></pre>)|(?P<opencode><code>)(?P<contentcode>[\W\D\w\s]*?)(?P<closecode></code>)|(?P<openbbcode>\[code=?\w*\])(?P<contentbbcode>[\W\D\w\s]*?)(?P<closebbcode>\[/code\])%i';
+    $pattern = '%(?P<openpre><pre>)(?P<contentpre>[\W\D\w\s]*?)(?P<closepre></pre>)|(?P<opencode><code>)(?P<contentcode>[\W\D\w\s]*?)(?P<closecode></code>)|(?P<openbbcode>\[code=?\w*\])(?P<contentbbcode>[\W\D\w\s]*?)(?P<closebbcode>\[/code\])%iu';
 
     if (preg_match_all($pattern, $this->text, $this->snippets)) {
 
-      $pattern = '%<pre>[\W\D\w\s]*?</pre>|<code>[\W\D\w\s]*?</code>|\[code=?\w*\][\W\D\w\s]*?\[/code\]%i';
+      $pattern = '%<pre>[\W\D\w\s]*?</pre>|<code>[\W\D\w\s]*?</code>|\[code=?\w*\][\W\D\w\s]*?\[/code\]%iu';
 
       // Replaces the code snippet with a special marker to be able to inject the code in place.
       $this->text = preg_replace($pattern, '___SNIPPET___', $this->text);
@@ -51,16 +51,16 @@ class HTMLConverter extends Converter {
   //! @brief Replace links.
   protected function replaceLinks() {
 
-    $this->text = preg_replace_callback('%(?i)<a[^>]+>(.+?)</a>%',
+    $this->text = preg_replace_callback('%<a[^>]+>(.+?)</a>%iu',
 
       function ($matches) {
 
         // Extracts the url.
-        if (preg_match('/\s*(?i)href\s*=\s*("([^"]*")|\'[^\']*\'|([^\'">\s]+))/', $matches[0], $others) === 1) {
+        if (preg_match('/\s*href\s*=\s*("([^"]*")|\'[^\']*\'|([^\'">\s]+))/iu', $matches[0], $others) === 1) {
           $href = strtolower(trim($others[1], '"'));
 
           // Extracts the target.
-          if (preg_match('/\s*(?i)target\s*=\s*("([^"]*")|\'[^\']*\'|([^\'">\s]+))/', $matches[0], $others) === 1)
+          if (preg_match('/\s*target\s*=\s*("([^"]*")|\'[^\']*\'|([^\'">\s]+))/iu', $matches[0], $others) === 1)
             $target = strtolower(trim($others[1], '"'));
           else
             $target = "_self";
@@ -80,12 +80,12 @@ class HTMLConverter extends Converter {
 
   //! @brief Replace images.
   protected function replaceImages() {
-    $this->text = preg_replace_callback('/<img[^>]+>/i',
+    $this->text = preg_replace_callback('/<img[^>]+>/iu',
 
       function ($matches) {
 
         // Extracts the src.
-        if (preg_match('/\s*(?i)src\s*=\s*("([^"]*")|\'[^\']*\'|([^\'">\s]+))/', $matches[0], $others) === 1)
+        if (preg_match('/\s*src\s*=\s*("([^"]*")|\'[^\']*\'|([^\'">\s]+))/iu', $matches[0], $others) === 1)
           $src = strtolower(trim($others[1], '"'));
         else
           throw new \RuntimeException(sprintf("Text identified by '%d' has malformed images", $this->id));
@@ -102,7 +102,7 @@ class HTMLConverter extends Converter {
 
   //! @brief Replace all other simple tags, even the lists.
   protected function replaceOtherTags() {
-    $this->text = preg_replace_callback('%</?[a-z][a-z0-9]*[^<>]*>%i',
+    $this->text = preg_replace_callback('%</?[a-z][a-z0-9]*[^<>]*>%iu',
 
       function ($matches) {
         $tag = strtolower($matches[0]);

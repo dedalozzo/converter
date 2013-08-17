@@ -16,7 +16,7 @@ class BBCodeConverter extends Converter {
   //! @brief Replaces BBCode bold.
   protected function replaceBold() {
 
-    $this->text = preg_replace_callback('%\[b\]([\W\D\w\s]*?)\[/b\]%i',
+    $this->text = preg_replace_callback('%\[b\]([\W\D\w\s]*?)\[/b\]%iu',
 
       function ($matches) {
         return "**".$matches[1]."**";
@@ -31,7 +31,7 @@ class BBCodeConverter extends Converter {
   //! @brief Replaces BBCode italic.
   protected function replaceItalic() {
 
-    $this->text = preg_replace_callback('%\[i\]([\W\D\w\s]*?)\[/i\]%i',
+    $this->text = preg_replace_callback('%\[i\]([\W\D\w\s]*?)\[/i\]%iu',
 
       function ($matches) {
         return "*".$matches[1]."*";
@@ -47,7 +47,7 @@ class BBCodeConverter extends Converter {
   //! text.
   protected function replaceUnderline() {
 
-    $this->text = preg_replace_callback('%\[u\]([\W\D\w\s]*?)\[/u\]%i',
+    $this->text = preg_replace_callback('%\[u\]([\W\D\w\s]*?)\[/u\]%iu',
 
       function ($matches) {
         return $matches[1];
@@ -62,7 +62,7 @@ class BBCodeConverter extends Converter {
   //! @brief Replaces BBCode strikethrough.
   protected function replaceStrikethrough() {
 
-    $this->text = preg_replace_callback('%\[s\]([\W\D\w\s]*?)\[/s\]%i',
+    $this->text = preg_replace_callback('%\[s\]([\W\D\w\s]*?)\[/s\]%iu',
 
       function ($matches) {
         return "~~".$matches[1]."~~";
@@ -77,7 +77,7 @@ class BBCodeConverter extends Converter {
   //! @brief Replaces BBCode lists.
   protected function replaceLists() {
     
-    $this->text = preg_replace_callback('%\[list(?P<type>=1)?\](?P<items>[\W\D\w\s]*?)\[/list\]%i',
+    $this->text = preg_replace_callback('%\[list(?P<type>=1)?\](?P<items>[\W\D\w\s]*?)\[/list\]%iu',
 
       function ($matches) {
         $buffer = "";
@@ -108,7 +108,7 @@ class BBCodeConverter extends Converter {
   //! @brief Replaces BBCode urls.
   protected function replaceUrls() {
     
-    $this->text = preg_replace_callback('%\[url\s*=\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\]\s]+))\s*(?:[^]\s]*)\]([\W\D\w\s]*?)\[/url\]%i',
+    $this->text = preg_replace_callback('%\[url\s*=\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\]\s]+))\s*(?:[^]\s]*)\]([\W\D\w\s]*?)\[/url\]%iu',
 
       function ($matches) {
         if (isset($matches[1]) && isset($matches[2]))
@@ -126,7 +126,7 @@ class BBCodeConverter extends Converter {
   //! @brief Replaces BBCode images.
   protected function replaceImages() {
 
-    $this->text = preg_replace_callback('%\[img\s*\]\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\]\s]+))\s*(?:[^]\s]*)\[/img\]%i',
+    $this->text = preg_replace_callback('%\[img\s*\]\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\]\s]+))\s*(?:[^]\s]*)\[/img\]%iu',
 
       function ($matches) {
         if (isset($matches[1]))
@@ -144,7 +144,7 @@ class BBCodeConverter extends Converter {
   //! @brief Replaces BBCode snippets.
   protected function replaceSnippets() {
 
-    $this->text = preg_replace_callback('%\[code\s*=?(?P<language>\w*)\](?P<snippet>[\W\D\w\s]*?)\[/code\]%i',
+    $this->text = preg_replace_callback('%\[code\s*=?(?P<language>\w*)\](?P<snippet>[\W\D\w\s]*?)\[/code\]%iu',
 
       function ($matches) {
         if (isset($matches['snippet'])) {
@@ -178,7 +178,7 @@ class BBCodeConverter extends Converter {
           return "```".$language.PHP_EOL.$matches['snippet']."```".PHP_EOL;
         }
         else
-          throw new \RuntimeException(sprintf("Text identified by '%d' has malformed BBCode snippet", $this->id));
+          throw new \RuntimeException(sprintf("Text identified by '%d' has malformed BBCode snippet.", $this->id));
       },
 
       $this->text
