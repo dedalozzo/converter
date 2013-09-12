@@ -141,10 +141,28 @@ class BBCodeConverter extends Converter {
   }
 
 
+  //! @brief Replaces BBCode quotes.
+  //! @details Thanks to Casimir et Hippolyte for helping me with this regex.
+  protected function replaceQuotes() {
+    // Removes the inner quotes, leaving just one level.
+    $this->text = preg_replace('~\G(?<!^)(?>(\[quote\b[^]]*](?>[^[]++|\[(?!/?quote)|(?1))*\[/quote])|(?<!\[)(?>[^[]++|\[(?!/?quote))+\K)|\[quote\b[^]]*]\K~', '', $this->text);
+
+    // Replaces all the remaining quotes with '> ' characters.
+    $this->text = preg_replace_callback('%\[quote\b[^]]*\]((?>[^[]++|\[(?!/?quote))*)\[/quote\]%i',
+
+      function($matches) {
+        return "> ".trim(str_replace(PHP_EOL, '', $matches[1]));
+      },
+
+      $this->text
+    );
+  }
+
+
   //! @brief Replaces BBCode snippets.
   protected function replaceSnippets() {
 
-    $this->text = preg_replace_callback('%\[code\s*=?(?P<language>\w*)\](?P<snippet>[\W\D\w\s]*?)\[/code\]%iu',
+    $this->text = preg_replace_callback('%\[code\s*=?(?P<language>\w*)\](?P<snippet>[\W\D\w\s]*?)\[\/code\]%iu',
 
       function ($matches) {
         if (isset($matches['snippet'])) {
@@ -196,6 +214,7 @@ class BBCodeConverter extends Converter {
     $this->replaceLists();
     $this->replaceUrls();
     $this->replaceImages();
+    $this->replaceQuotes();
     $this->replaceSnippets();
 
     return $this->text;
