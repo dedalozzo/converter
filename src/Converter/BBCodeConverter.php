@@ -151,7 +151,8 @@ class BBCodeConverter extends Converter {
     $this->text = preg_replace_callback('%\[quote\b[^]]*\]((?>[^[]++|\[(?!/?quote))*)\[/quote\]%i',
 
       function($matches) {
-        return "> ".trim(str_replace(PHP_EOL, '', $matches[1]));
+        //return "> ".trim(str_replace(PHP_EOL, '', $matches[1]));
+        return "> ".$matches[1];
       },
 
       $this->text
