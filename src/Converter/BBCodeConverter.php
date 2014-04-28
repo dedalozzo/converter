@@ -43,14 +43,13 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode underline. Unfortunately Markdown doesn't support underline, so we just revert to normal 
-  //! text.
+  //! @brief Replaces BBCode underline. Hoedown support underline.
   protected function replaceUnderline() {
 
     $this->text = preg_replace_callback('%\[u\]([\W\D\w\s]*?)\[/u\]%iu',
 
       function ($matches) {
-        return $matches[1];
+        return "_".$matches[1]."_";
       },
 
       $this->text
