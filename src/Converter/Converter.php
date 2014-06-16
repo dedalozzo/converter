@@ -20,7 +20,7 @@ abstract class Converter {
   //! @param[in] string $id You can provide an identifier which is used in case an exception is raised during the
   //! conversion process.
   public function __construct($text, $id = "") {
-    $this->text = (string)$text;
+    $this->text = $text;
     $this->id = (string)$id;
   }
 
