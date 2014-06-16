@@ -98,6 +98,10 @@ class BBCodeConverter extends Converter {
 
         }
 
+        // We need a like break above the list and another one below.
+        if (!empty($buffer))
+          $buffer = PHP_EOL.$buffer.PHP_EOL;
+
         return $buffer;
       },
 
