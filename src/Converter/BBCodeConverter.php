@@ -75,22 +75,25 @@ class BBCodeConverter extends Converter {
 
   //! @brief Replaces BBCode lists.
   protected function replaceLists() {
-    
+
     $this->text = preg_replace_callback('%\[list(?P<type>=1)?\](?P<items>[\W\D\w\s]*?)\[/list\]%iu',
 
       function ($matches) {
         $buffer = "";
 
-        if (preg_match_all('/(?:(?![[*\]]).)*/i', $matches['items'], $listItems)) {
+        if (preg_match_all('/(?:(?![[*\]]).)*/iu', $matches['items'], $result)) {
+          $items = $result[0];
 
           if (isset($matches['type']) && $matches['type'] == '=1') { // ordered list
-            foreach ($listItems as $itemMatch)
-              $buffer .= '- '.trim($itemMatch[1]).PHP_EOL;
+            foreach ($items as $item)
+              if (!empty($item))
+                $buffer .= '- '.trim($item).PHP_EOL;
           }
           else { // unordered list
-            $counter = count($listItems);
+            $counter = count($items);
             for ($i = 0; $i < $counter; $i++)
-              $buffer .= (string)($i + 1).'. '.trim($listItems[$i][1]).PHP_EOL;
+              if (!empty($item))
+                $buffer .= (string)($i + 1).'. '.trim($items[$i]).PHP_EOL;
           }
 
         }
