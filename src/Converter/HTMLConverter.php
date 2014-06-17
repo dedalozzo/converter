@@ -185,6 +185,9 @@ class HTMLConverter extends Converter {
 
   //! @brief Converts the provided HTML text into BBCode.
   public function toBBCode() {
+    // We don't want any HTML entities.
+    $this->text = htmlspecialchars_decode($this->text);
+
     $this->removeSnippets();
     $this->replaceLinks();
     $this->replaceImages();
