@@ -49,7 +49,7 @@ class BBCodeConverter extends Converter {
     $this->text = preg_replace_callback('%\[b\]([\W\D\w\s]*?)\[/b\]%iu',
 
       function ($matches) {
-        return "**".$matches[1]."**";
+        return "**".trim($matches[1], " ")."**";
       },
 
       $this->text
@@ -64,7 +64,7 @@ class BBCodeConverter extends Converter {
     $this->text = preg_replace_callback('%\[i\]([\W\D\w\s]*?)\[/i\]%iu',
 
       function ($matches) {
-        return "*".$matches[1]."*";
+        return "*".trim($matches[1], " ")."*";
       },
 
       $this->text
@@ -79,7 +79,7 @@ class BBCodeConverter extends Converter {
     $this->text = preg_replace_callback('%\[u\]([\W\D\w\s]*?)\[/u\]%iu',
 
       function ($matches) {
-        return "_".$matches[1]."_";
+        return "_".trim($matches[1], " ")."_";
       },
 
       $this->text
@@ -94,7 +94,7 @@ class BBCodeConverter extends Converter {
     $this->text = preg_replace_callback('%\[s\]([\W\D\w\s]*?)\[/s\]%iu',
 
       function ($matches) {
-        return "~~".$matches[1]."~~";
+        return "~~".trim($matches[1], " ")."~~";
       },
 
       $this->text
