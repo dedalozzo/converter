@@ -13,6 +13,36 @@ namespace Converter;
 class BBCodeConverter extends Converter {
 
 
+  //! @brief Removes BBCode size.
+  protected function removeSize() {
+
+    $this->text = preg_replace_callback('%\[size=\d*\]([\W\D\w\s]*?)\[/size\]%iu',
+
+      function ($matches) {
+        return $matches[1];
+      },
+
+      $this->text
+    );
+
+  }
+
+
+  //! @brief Removes BBCode center.
+  protected function removeCenter() {
+
+    $this->text = preg_replace_callback('%\[center\]([\W\D\w\s]*?)\[/center\]%iu',
+
+      function ($matches) {
+        return $matches[1];
+      },
+
+      $this->text
+    );
+
+  }
+
+
   //! @brief Replaces BBCode bold.
   protected function replaceBold() {
 
@@ -214,6 +244,8 @@ class BBCodeConverter extends Converter {
 
   //! @brief Converts the provided BBCode text to an equivalent Markdown text.
   public function toMarkdown() {
+    $this->removeCenter();
+    $this->removeSize();
     $this->replaceBold();
     $this->replaceItalic();
     $this->replaceUnderline();
