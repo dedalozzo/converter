@@ -230,7 +230,7 @@ class BBCodeConverter extends Converter {
           elseif ($language == 'aspnet')
             $language = 'aspx-vb';
 
-          return "```".$language.PHP_EOL.$matches['snippet']."```".PHP_EOL;
+          return PHP_EOL."```".$language.PHP_EOL.trim($matches['snippet']).PHP_EOL."```".PHP_EOL;
         }
         else
           throw new \RuntimeException(sprintf("Text identified by '%d' has malformed BBCode snippet.", $this->id));
