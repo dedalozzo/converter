@@ -188,7 +188,7 @@ class BBCodeConverter extends Converter {
 
       function($matches) {
         //return "> ".trim(str_replace(PHP_EOL, '', $matches[1]));
-        return "> ".$matches[1];
+        return "> ".trim($matches[1]).PHP_EOL.PHP_EOL;
       },
 
       $this->text
