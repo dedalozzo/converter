@@ -111,21 +111,25 @@ class BBCodeConverter extends Converter {
       function ($matches) {
         $buffer = "";
 
-        if (preg_match_all('/(?:(?![[*\]]).)*/iu', $matches['items'], $result)) {
-          $items = $result[0];
+        $list = preg_replace('/\s*$|^\s*/mu', '', $matches['items']);
+        if (is_null($list))
+          throw new \RuntimeException(sprintf("Text identified by '%d' has malformed BBCode lists", $this->id));
 
-          if (isset($matches['type']) && $matches['type'] == '=1') { // ordered list
-            foreach ($items as $item)
-              if (!empty($item))
-                $buffer .= '- '.trim($item).PHP_EOL;
-          }
-          else { // unordered list
-            $counter = count($items);
-            for ($i = 0; $i < $counter; $i++)
-              if (!empty($item))
-                $buffer .= (string)($i + 1).'. '.trim($items[$i]).PHP_EOL;
-          }
+        $items = preg_split('/\[\*\]/u', $list);
 
+        $counter = count($items);
+
+        if (isset($matches['type']) && $matches['type'] == '=1') { // ordered list
+          // We start from 1 to discard the first string, in fact, it's empty.
+          for ($i = 1; $i < $counter; $i++)
+            if (!empty($items[$i]))
+              $buffer .= (string)($i).'. '.trim($items[$i]).PHP_EOL;
+        }
+        else { // unordered list
+          // We start from 1 to discard the first string, in fact, it's empty.
+          for ($i = 1; $i < $counter; $i++)
+            if (!empty($items[$i]))
+              $buffer .= '- '.trim($items[$i]).PHP_EOL;
         }
 
         // We need a like break above the list and another one below.
