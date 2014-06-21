@@ -170,7 +170,7 @@ class BBCodeConverter extends Converter {
 
       function ($matches) {
         if (isset($matches[1]))
-          return "![]"."(".$matches[1].")";
+          return PHP_EOL."![]"."(".$matches[1].")".PHP_EOL;
         else
           throw new \RuntimeException(sprintf("Text identified by '%d' have malformed BBCode images", $this->id));
       },
@@ -191,8 +191,8 @@ class BBCodeConverter extends Converter {
     $this->text = preg_replace_callback('%\[quote\b[^]]*\]((?>[^[]++|\[(?!/?quote))*)\[/quote\]%i',
 
       function($matches) {
-        //return "> ".trim(str_replace(PHP_EOL, '', $matches[1]));
-        return "> ".trim($matches[1]).PHP_EOL.PHP_EOL;
+        $quote = preg_replace('/^\s*/mu', '', trim($matches[1]));
+        return "> ".$quote.PHP_EOL.PHP_EOL;
       },
 
       $this->text
