@@ -75,4 +75,4 @@ Filippo F. Fadda - <filippo.fadda@programmazione.it> - <http://www.linkedin.com/
 
 License
 -------
-Pygmentize is licensed under the Apache License, Version 2.0 - see the LICENSE file for details.
+Converter is licensed under the Apache License, Version 2.0 - see the LICENSE file for details.
