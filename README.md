@@ -1,3 +1,9 @@
+[![Latest Stable Version](https://poser.pugx.org/3f/converter/v/stable.png)](https://packagist.org/packages/3f/converter)
+[![Latest Unstable Version](https://poser.pugx.org/3f/converter/v/unstable.png)](https://packagist.org/packages/3f/converter)
+[![License](https://poser.pugx.org/3f/converter/license.svg)](https://packagist.org/packages/3f/converter)
+[![Total Downloads](https://poser.pugx.org/3f/converter/downloads.png)](https://packagist.org/packages/3f/converter)
+
+
 Converter
 =========
 A set of classes to translate a text from a HTML to BBcode and from BBCode to Markdown.
