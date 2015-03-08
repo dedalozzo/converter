@@ -57,7 +57,7 @@ class HTMLConverter extends Converter {
 
         // Extracts the url.
         if (preg_match('/\s*href\s*=\s*("([^"]*")|\'[^\']*\'|([^\'">\s]+))/iu', $matches[0], $others) === 1) {
-          $href = strtolower(trim($others[1], '"'));
+          $href = trim($others[1], '"');
 
           // Extracts the target.
           if (preg_match('/\s*target\s*=\s*("([^"]*")|\'[^\']*\'|([^\'">\s]+))/iu', $matches[0], $others) === 1)
