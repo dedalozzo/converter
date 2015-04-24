@@ -1,19 +1,24 @@
 <?php
 
-//! @file BBCodeConverter.php
-//! @brief This file contains the BBCodeConverter class.
-//! @details
-//! @author Filippo F. Fadda
-
+/**
+ * @file BBCodeConverter.php
+ * @brief This file contains the BBCodeConverter class.
+ * @details
+ * @author Filippo F. Fadda
+ */
 
 namespace Converter;
 
 
-//! @brief A rudimental converter that takes as input a BBCode formatted text and converts it to Markdown.
+/**
+ * @brief A rudimental converter that takes as input a BBCode formatted text and converts it to Markdown.
+ */
 class BBCodeConverter extends Converter {
 
 
-  //! @brief Removes BBCode size.
+  /**
+   * @brief Removes BBCode size.
+   */
   protected function removeSize() {
 
     $this->text = preg_replace_callback('%\[size=\d*\]([\W\D\w\s]*?)\[/size\]%iu',
@@ -28,7 +33,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Removes BBCode center.
+  /**
+   * @brief Removes BBCode center.
+   */
   protected function removeCenter() {
 
     $this->text = preg_replace_callback('%\[center\]([\W\D\w\s]*?)\[/center\]%iu',
@@ -43,7 +50,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode bold.
+  /**
+   * @brief Replaces BBCode bold.
+   */
   protected function replaceBold() {
 
     $this->text = preg_replace_callback('%\[b\]([\W\D\w\s]*?)\[/b\]%iu',
@@ -58,7 +67,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode italic.
+  /**
+   * @brief Replaces BBCode italic.
+   */
   protected function replaceItalic() {
 
     $this->text = preg_replace_callback('%\[i\]([\W\D\w\s]*?)\[/i\]%iu',
@@ -73,7 +84,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode underline. Hoedown support underline.
+  /**
+   * @brief Replaces BBCode underline. Hoedown support underline.
+   */
   protected function replaceUnderline() {
 
     $this->text = preg_replace_callback('%\[u\]([\W\D\w\s]*?)\[/u\]%iu',
@@ -88,7 +101,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode strikethrough.
+  /**
+   * @brief Replaces BBCode strikethrough.
+   */
   protected function replaceStrikethrough() {
 
     $this->text = preg_replace_callback('%\[s\]([\W\D\w\s]*?)\[/s\]%iu',
@@ -103,7 +118,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode lists.
+  /**
+   * @brief Replaces BBCode lists.
+   */
   protected function replaceLists() {
 
     $this->text = preg_replace_callback('%\[list(?P<type>=1)?\](?P<items>[\W\D\w\s]*?)\[/list\]%iu',
@@ -145,7 +162,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode urls.
+  /**
+   * @brief Replaces BBCode urls.
+   */
   protected function replaceUrls() {
     
     $this->text = preg_replace_callback('%\[url\s*=\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\]\s]+))\s*(?:[^]\s]*)\]([\W\D\w\s]*?)\[/url\]%iu',
@@ -163,7 +182,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode images.
+  /**
+   * @brief Replaces BBCode images.
+   */
   protected function replaceImages() {
 
     $this->text = preg_replace_callback('%\[img\s*\]\s*("(?:[^"]*")|\A[^\']*\Z|(?:[^\'">\]\s]+))\s*(?:[^]\s]*)\[/img\]%iu',
@@ -181,8 +202,10 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode quotes.
-  //! @details Thanks to Casimir et Hippolyte for helping me with this regex.
+  /**
+   * @brief Replaces BBCode quotes.
+   * @details Thanks to Casimir et Hippolyte for helping me with this regex.
+   */
   protected function replaceQuotes() {
     // Removes the inner quotes, leaving just one level.
     $this->text = preg_replace('~\G(?<!^)(?>(\[quote\b[^]]*](?>[^[]++|\[(?!/?quote)|(?1))*\[/quote])|(?<!\[)(?>[^[]++|\[(?!/?quote))+\K)|\[quote\b[^]]*]\K~', '', $this->text);
@@ -200,7 +223,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Replaces BBCode snippets.
+  /**
+   * @brief Replaces BBCode snippets.
+   */
   protected function replaceSnippets() {
 
     $this->text = preg_replace_callback('%\[code\s*=?(?P<language>\w*)\](?P<snippet>[\W\D\w\s]*?)\[\/code\]%iu',
@@ -246,7 +271,9 @@ class BBCodeConverter extends Converter {
   }
 
 
-  //! @brief Converts the provided BBCode text to an equivalent Markdown text.
+  /**
+   * @brief Converts the provided BBCode text to an equivalent Markdown text.
+   */
   public function toMarkdown() {
     $this->removeCenter();
     $this->removeSize();

@@ -1,22 +1,28 @@
 <?php
 
-//! @file HTMLConverter.php
-//! @brief This file contains the HTMLConverter class.
-//! @details
-//! @author Filippo F. Fadda
+/**
+ * @file HTMLConverter.php
+ * @brief This file contains the HTMLConverter class.
+ * @details
+ * @author Filippo F. Fadda
+ */
 
 
 namespace Converter;
 
-
-//! @brief A rudimental converter that takes as input HTML and replaces tags with related BBCodes.
-//! @detail This converter doesn't touch the HTML inside pre or code tags.
+/**
+ * @brief A rudimental converter that takes as input HTML and replaces tags with related BBCodes.
+ * @details This converter doesn't touch the HTML inside pre or code tags.
+ */
 class HTMLConverter extends Converter {
   protected $snippets = [];
 
 
-  // Let's find all code snippets inside the body. The code can be inside <pre></pre>, <code></code>, or [code][/code]
-  // if you are using BBCode markup language.
+  /**
+   * @brief Finds all code snippets inside the body, replacing them with appropriate markers.
+   * @details The code can be inside `<pre></pre>`, `<code></code>`, or `[code][/code]` in case you are using BBCode
+   * markup language.
+   */
   protected function removeSnippets() {
     $pattern = '%(?P<openpre><pre>)(?P<contentpre>[\W\D\w\s]*?)(?P<closepre></pre>)|(?P<opencode><code>)(?P<contentcode>[\W\D\w\s]*?)(?P<closecode></code>)|(?P<openbbcode>\[code=?\w*\])(?P<contentbbcode>[\W\D\w\s]*?)(?P<closebbcode>\[/code\])%iu';
 
@@ -30,7 +36,9 @@ class HTMLConverter extends Converter {
   }
 
 
-  //! @brief Restores the snippets, converting the HTML tags to BBCode tags.
+  /**
+   * @brief Restores the snippets, converting the HTML tags to BBCode tags.
+   */
   protected function restoreSnippets() {
     $snippetsCount = count($this->snippets[0]);
 
@@ -48,7 +56,9 @@ class HTMLConverter extends Converter {
   }
 
 
-  //! @brief Replace links.
+  /**
+   * @brief Replace links.
+   */
   protected function replaceLinks() {
 
     $this->text = preg_replace_callback('%<a[^>]+>(.+?)</a>%iu',
@@ -78,7 +88,9 @@ class HTMLConverter extends Converter {
   }
 
 
-  //! @brief Replace images.
+  /**
+   * @brief Replace images.
+   */
   protected function replaceImages() {
     $this->text = preg_replace_callback('/<img[^>]+>/iu',
 
@@ -100,7 +112,9 @@ class HTMLConverter extends Converter {
   }
 
 
-  //! @brief Replace all other simple tags, even the lists.
+  /**
+   * @brief Replace all other simple tags, even the lists.
+   */
   protected function replaceOtherTags() {
     $this->text = preg_replace_callback('%</?[a-z][a-z0-9]*[^<>]*>%iu',
 
@@ -183,7 +197,9 @@ class HTMLConverter extends Converter {
   }
 
 
-  //! @brief Converts the provided HTML text into BBCode.
+  /**
+   * @brief Converts the provided HTML text into BBCode.
+   */
   public function toBBCode() {
     // We don't want any HTML entities.
     $this->text = htmlspecialchars_decode($this->text);
