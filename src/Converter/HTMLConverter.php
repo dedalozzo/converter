@@ -98,7 +98,7 @@ class HTMLConverter extends Converter {
 
         // Extracts the src.
         if (preg_match('/\s*src\s*=\s*("([^"]*")|\'[^\']*\'|([^\'">\s]+))/iu', $matches[0], $others) === 1)
-          $src = strtolower(trim($others[1], '"'));
+          $src = trim($others[1], '"');
         else
           throw new \RuntimeException(sprintf("Text identified by '%d' has malformed images", $this->id));
 
