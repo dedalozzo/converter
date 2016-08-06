@@ -18,6 +18,7 @@ namespace Converter;
  */
 abstract class Converter {
   protected $text;
+  protected $id;
 
 
   /**
@@ -26,7 +27,7 @@ abstract class Converter {
    * @param[in] string $id You can provide an identifier which is used in case an exception is raised during the
    * conversion process.
    */
-  public function __construct($text, $id = "") {
+  public function __construct($text, $id = '') {
     $this->text = $text;
     $this->id = (string)$id;
   }
