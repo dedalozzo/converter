@@ -6,14 +6,21 @@
 
 Converter
 =========
-A set of classes to translate a text from a HTML to BBcode and from BBCode to Markdown.
+A set of classes to translate a text **from HTML to BBCode** and **from BBCode to Markdown**.
+
+The HTML to BBCode converter, in particular, has not been created with the intent to convert an entire HTML page, but 
+just to convert a set of HTML tags used to format articles and blog posts in the HTML era, when Markdown and BBcode 
+didn't exist at all.
+
+The special BBCode to Markdown converter is able to convert bold, italic, underline and strikethrough texts, lists, 
+urls, images, quotes and even code blocks (snippets).
 
 
 Composer Installation
 ---------------------
 
 To install Converter, you first need to install [Composer](http://getcomposer.org/), a Package Manager for
-PHP, following those few [steps](http://getcomposer.org/doc/00-intro.md#installation-nix):
+PHP, following these few [steps](http://getcomposer.org/doc/00-intro.md#installation-nix):
 
 ```sh
 curl -s https://getcomposer.org/installer | php
@@ -46,7 +53,7 @@ composer update
 
 Usage
 -----
-There are two classes: `HTMLConverter` and `BBCodeConverter()`. The first class may be used to convert from HTML to
+There are two classes: `HTMLConverter` and `BBCodeConverter`. The first class may be used to convert from HTML to
 BBCode, while the second one is used to convert from BBCode to Markdown.
 
 HTML to BBCode conversion:
@@ -62,6 +69,8 @@ BBCode to Markdown conversion:
 $converter = new Converter\BBCodeConverter($text, $id);
 echo $converter->toMarkdown();
 ```
+
+In both cases the `$id` is optional. When provided is used in case an exception is raised during the conversion process.
 
 
 Documentation
