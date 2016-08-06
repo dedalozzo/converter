@@ -12,7 +12,7 @@ The HTML to BBCode converter, in particular, has not been created with the inten
 just to convert a set of HTML tags used to format articles and blog posts in the HTML era, when Markdown and BBcode 
 didn't exist at all.
 
-The special BBCode to Markdown converter is able to convert bold, italic, underline and strikethrough texts, lists, 
+The special BBCode to Markdown converter is able to convert: bold, italic, underline and strikethrough texts, lists, 
 urls, images, quotes and even code blocks (snippets).
 
 
