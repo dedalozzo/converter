@@ -1,5 +1,7 @@
 [![Latest Stable Version](https://poser.pugx.org/3f/converter/v/stable.png)](https://packagist.org/packages/3f/converter)
 [![Latest Unstable Version](https://poser.pugx.org/3f/converter/v/unstable.png)](https://packagist.org/packages/3f/converter)
+[![Build Status](https://scrutinizer-ci.com/g/dedalozzo/converter/badges/build.png?b=master)](https://scrutinizer-ci.com/g/dedalozzo/converter/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dedalozzo/converter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dedalozzo/converter/?branch=master)
 [![License](https://poser.pugx.org/3f/converter/license.svg)](https://packagist.org/packages/3f/converter)
 [![Total Downloads](https://poser.pugx.org/3f/converter/downloads.png)](https://packagist.org/packages/3f/converter)
 
