@@ -186,10 +186,8 @@ class HTMLConverter extends Converter {
             return '[/center]';
             break;
 
-          // Allow for newlines - If no BR tags in initial text try running through nl2br()
-          // http://php.net/manual/en/function.nl2br.php
-          case ($tag == '<br>' || $tag == '<br />'):
-            return "\n";
+          case ($tag == '<br>' || $tag == '<br/>' || $tag == '<br />'):
+            return PHP_EOL;
             break;
 
           default:
