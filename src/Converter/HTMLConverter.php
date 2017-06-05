@@ -186,6 +186,10 @@ class HTMLConverter extends Converter {
             return '[/center]';
             break;
 
+          case ($tag == '<br>' || $tag == '<br/>' || $tag == '<br />'):
+            return PHP_EOL;
+            break;
+
           default:
             return $tag;
         }
@@ -214,4 +218,4 @@ class HTMLConverter extends Converter {
     return $this->text;
   }
 
-} 
+}
