@@ -124,71 +124,54 @@ class HTMLConverter extends Converter {
         switch ($tag) {
           case ($tag == '<strong>' || $tag == '<b>'):
             return '[b]';
-            break;
 
           case ($tag == '</strong>' || $tag == '</b>'):
             return '[/b]';
-            break;
 
           case ($tag == '<em>' || $tag == '<i>'):
             return '[i]';
-            break;
 
           case ($tag == '</em>' || $tag == '</i>'):
             return '[/i]';
-            break;
 
           case '<u>':
             return '[u]';
-            break;
 
           case '</u>':
             return '[/u]';
-            break;
 
           case ($tag == '<strike>' || $tag == '<del>'):
             return '[s]';
-            break;
 
           case ($tag == '</strike>' || $tag == '</del>'):
             return '[/s]';
-            break;
 
           case '<ul>':
             return '[list]';
-            break;
 
           case '</ul>':
             return '[/list]';
-            break;
 
           case '<ol>':
             return '[list=1]';
-            break;
 
           case '</ol>':
             return '[/list]';
-            break;
 
           case '<li>':
             return '[*]';
-            break;
 
           case '</li>':
             return '';
-            break;
 
           case '<center>':
             return '[center]';
-            break;
 
           case '</center>':
             return '[/center]';
-            break;
 
           case ($tag == '<br>' || $tag == '<br/>' || $tag == '<br />'):
             return PHP_EOL;
-            break;
 
           default:
             return $tag;
