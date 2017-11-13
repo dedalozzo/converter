@@ -2,7 +2,7 @@
     "name": "3f/converter",
     "description": "A set of classes to translate a text from HTML to BBcode and from BBCode to Markdown.",
     "keywords": ["bbcode", "markdown", "html", "converter", "translator", "formatter"],
-    "homepage": "http://github.com/dedalozzo/Converter",
+    "homepage": "https://github.com/dedalozzo/converter",
     "type": "library",
     "license": "Apache-2.0",
     "authors": [
