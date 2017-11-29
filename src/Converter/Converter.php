@@ -23,8 +23,8 @@ abstract class Converter {
 
   /**
    * @brief Constructor.
-   * @param[in] string $text The text to be converted.
-   * @param[in] string $id You can provide an identifier which is used in case an exception is raised during the
+   * @param string $text The text to be converted.
+   * @param string $id You can provide an identifier which is used in case an exception is raised during the
    * conversion process.
    */
   public function __construct($text, $id = '') {
