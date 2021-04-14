@@ -70,6 +70,23 @@ class BBCodeConverter extends Converter
         
     }
     
+    /**
+     * @brief Removes BBCode color.
+     */
+    protected function removeColor()
+    {
+        
+        $this->text = preg_replace_callback('%\[color[=?][#?][\w]*\]([\W\D\w\s]*?)\[/color\]%iu',
+            
+            function ($matches) {
+                return $matches[1];
+            },
+            
+            $this->text
+        );
+        
+    }
+    
     
     /**
      * @brief Replaces BBCode bold.
@@ -326,6 +343,7 @@ class BBCodeConverter extends Converter
     {
         $this->removeCenter();
         $this->removeLeft();
+        $this->removeColor();
         $this->removeSize();
         $this->replaceBold();
         $this->replaceItalic();
@@ -338,7 +356,7 @@ class BBCodeConverter extends Converter
         $this->replaceQuotes();
         $this->replaceSnippets();
         
-        return $this->text;
+        return trim($this->text);
     }
     
 } 
